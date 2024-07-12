@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 void step1();
 void step2();
 void step3();
