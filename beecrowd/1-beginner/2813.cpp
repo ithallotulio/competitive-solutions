@@ -1,5 +1,3 @@
-// NEEDS FINISH
-
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -15,9 +13,9 @@ int main() {
     for (i = 0; i < n*2; i++) {
         string weather;
         cin >> weather;
+
         bool leavingHome = (i % 2) == 0 ? true : false;
         bool isRaining = weather == "chuva" ? true : false;
-
         if (leavingHome) {
             if (isRaining) {
                 if (!carryingUmbrella) {
@@ -42,13 +40,6 @@ int main() {
             }
         }
     }
-    if (carryingUmbrella) {
-        if ((i-1) % 2 == 0) {
-            storageOffice++;
-        } else {
-            storageHome++;
-        }
-    }
-    cout << storageHome << " " << storageOffice << endl;
+    cout << buyHome << " " << buyOffice << endl;
     return 0;
 }
