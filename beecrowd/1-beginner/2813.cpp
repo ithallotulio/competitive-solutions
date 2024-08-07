@@ -7,36 +7,37 @@ int main() {
     cin >> n;
     int storageHome = 0;
     int storageOffice = 0;
-    int buyOffice = 0;
     int buyHome = 0;
-    bool carryingUmbrella = false;
-    for (i = 0; i < n*2; i++) {
-        string weather;
-        cin >> weather;
+    int buyOffice = 0;
 
-        bool leavingHome = (i % 2) == 0 ? true : false;
-        bool isRaining = weather == "chuva" ? true : false;
-        if (leavingHome) {
-            if (isRaining) {
-                if (!carryingUmbrella) {
-                    carryingUmbrella = true;
-                    if (storageHome > 0) storageHome--;
-                    else buyHome++;
+    vector<string> weather(n*2);
+    cin >> weather[0];
+    if (weather[0] == "chuva") {
+        buyHome++;
+    }
+
+    for (i = 1; i < n*2; i++) {
+        cin >> weather[i];
+        bool leavingHome = i % 2 == 0 ? true : false;
+        if (weather[i] == "chuva" && weather[i-1] == "sol") {
+            if (leavingHome) {
+                if (storageHome > 0) {
+                    storageHome--;
+                } else {
+                    buyHome++;  
                 }
-            } else {
-                if (carryingUmbrella) storageHome++;
-                carryingUmbrella = false;
+            } else { // leavingOffice
+                if (storageOffice > 0) {
+                    storageOffice--;
+                } else {
+                    buyOffice++;
+                }
             }
-        } else { // leavingOffice
-            if (isRaining) {
-                if (!carryingUmbrella) {
-                    carryingUmbrella = true;
-                    if (storageOffice > 0) storageOffice--;
-                    else buyOffice++;
-                }
+        } else if (weather[i] == "sol" && weather[i-1] == "chuva") {
+            if (leavingHome) {
+                storageHome++;
             } else {
-                if (carryingUmbrella) storageOffice++;
-                carryingUmbrella = false;
+                storageOffice++;
             }
         }
     }
